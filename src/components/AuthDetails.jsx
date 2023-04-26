@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { auth } from '../firebase';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 const AuthDetails = () => {
   const [authUser, setAuthUser] = useState(null);
@@ -32,13 +33,22 @@ const AuthDetails = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>React Firebase: Auth Details</title>
+      </Helmet>
       {authUser ? (
         <>
           <p>{`Signed In as ${authUser.email}`}</p>
           <button onClick={userSignOut}>Sign Out</button>
         </>
       ) : (
-        <p>Signed Out</p>
+        <>
+          <p>You're not connected.</p>
+          <p>
+            Please <Link to="/sign-in">Sign In</Link> or{' '}
+            <Link to="/sign-up">Sign Up</Link>
+          </p>
+        </>
       )}
     </div>
   );

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { auth } from '../../firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -23,6 +24,9 @@ const SignUp = () => {
 
   return (
     <div className="sign-in-container">
+      <Helmet>
+        <title>React Firebase: Sign Up</title>
+      </Helmet>
       <form onSubmit={signUp}>
         <h1>Create Account</h1>
         <input
