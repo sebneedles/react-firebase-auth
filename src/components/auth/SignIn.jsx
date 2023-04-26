@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { auth } from '../../firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import { Link, useNavigate } from 'react-router-dom';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const signIn = (e) => {
     // Todo Sign In
@@ -12,6 +14,7 @@ const SignIn = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         console.log(userCredential);
+        navigate('/auth-details');
       })
       .catch((error) => {
         console.log(error);
@@ -36,6 +39,9 @@ const SignIn = () => {
         ></input>
         <button type="submit">Log In</button>
       </form>
+      <p>
+        If you don't have account, please <Link to="/sign-up">Sign Up</Link>.
+      </p>
     </div>
   );
 };
